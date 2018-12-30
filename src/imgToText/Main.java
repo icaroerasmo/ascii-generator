@@ -61,14 +61,28 @@ public class Main {
 				
 	            for (int j = 0; j < image.getWidth(); j++) {
 	            	
+	            	// White background mode
+	            	
+//	            	if(image.getRGB(j, i) > -4194304) {
+//	            		builder.append(" ");
+//	            	} else if (image.getRGB(j, i) <= -4194304 && image.getRGB(j, i) > -6291456) {
+//	            		builder.append("I");
+//	            	} else if(image.getRGB(j, i) <= -6291456 && image.getRGB(j, i) > -8388608) {
+//	            		builder.append("/");
+//	            	} else {
+//	            		builder.append("$");
+//	            	}
+	            	
+	            	// Black background mode
+	            	
 	            	if(image.getRGB(j, i) > -4194304) {
-	            		builder.append(" ");
-	            	} else if (image.getRGB(j, i) <= -4194304 && image.getRGB(j, i) > -6291456) {
-	            		builder.append("I");
-	            	} else if(image.getRGB(j, i) <= -6291456 && image.getRGB(j, i) > -8388608) {
-	            		builder.append("/");
-	            	} else {
 	            		builder.append("$");
+	            	} else if (image.getRGB(j, i) <= -4194304 && image.getRGB(j, i) > -6291456) {
+	            		builder.append("/");
+	            	} else if(image.getRGB(j, i) <= -6291456 && image.getRGB(j, i) > -8388608) {
+	            		builder.append("I");
+	            	} else {
+	            		builder.append(" ");
 	            	}
 	            }
 	            
