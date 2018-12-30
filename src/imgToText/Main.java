@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import javax.imageio.ImageIO;
 public class Main {
 	
 	public static void main(String[] args) {
-		BufferedImage original = loadImage(Paths.get("/home/icaroerasmo/Downloads/bruna-marquezine-fa-450x363.jpeg"));
+		BufferedImage original = loadImage(Paths.get("/home/icaroerasmo/Downloads/screenshot_20180730-115147.jpg"));
 		original = resize(original,(int) (original.getWidth() * 0.3),(int) (original.getHeight() * 0.3));
 		//BufferedImage blackAndWhite = convertToBlackAndWhite(original);
 		BufferedImage blackAndWhite = convertToGrayScale(original);
@@ -66,21 +67,21 @@ public class Main {
 //	            	if(image.getRGB(j, i) > -4194304) {
 //	            		builder.append(" ");
 //	            	} else if (image.getRGB(j, i) <= -4194304 && image.getRGB(j, i) > -6291456) {
-//	            		builder.append("I");
+//	            		builder.append("*");
 //	            	} else if(image.getRGB(j, i) <= -6291456 && image.getRGB(j, i) > -8388608) {
-//	            		builder.append("/");
-//	            	} else {
 //	            		builder.append("$");
+//	            	} else {
+//	            		builder.append("#");
 //	            	}
 	            	
 	            	// Black background mode
 	            	
 	            	if(image.getRGB(j, i) > -4194304) {
-	            		builder.append("$");
+	            		builder.append("#");
 	            	} else if (image.getRGB(j, i) <= -4194304 && image.getRGB(j, i) > -6291456) {
-	            		builder.append("/");
+	            		builder.append("$");
 	            	} else if(image.getRGB(j, i) <= -6291456 && image.getRGB(j, i) > -8388608) {
-	            		builder.append("I");
+	            		builder.append("*");
 	            	} else {
 	            		builder.append(" ");
 	            	}
@@ -129,7 +130,9 @@ public class Main {
 		g.drawImage(image, 0, 0, null);  
 		g.dispose();
 		
-		return grayScale;
+		RescaleOp op = new RescaleOp(0.5f, 20, null);
+		
+		return op.filter(grayScale, grayScale);
 	}
 	
 	private static void save(BufferedImage image, Path location){
